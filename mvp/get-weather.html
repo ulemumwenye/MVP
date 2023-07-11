@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WeatherApp - Get Weather</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>WeatherApp</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="forecast.html">Forecast</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="favorites.html">Favorites</a></li>
+        <li><a href="search.html">Search</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Get Weather</h2>
+      <form id="weather-form">
+        <div>
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required>
+        </div>
+        <button type="submit">Get Weather</button>
+      </form>
+      <div id="weather-info"></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
