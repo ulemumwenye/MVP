@@ -28,3 +28,21 @@ To run WeatherApp locally, follow these steps:
     Install the required dependencies: pip install -r requirements.txt
     Run the application: python app.py
     Open your web browser and visit: http://localhost:5000
+
+    Usage
+
+    Upon launching WeatherApp, the user will be prompted to provide their location information.
+    Once the location is entered, WeatherApp will fetch the weather data and display it on the screen.
+    Users can view the current weather conditions, forecasts, and additional details by navigating through the intuitive user interface.
+    We welcome contributions to WeatherApp! To contribute, please follow these guidelines:
+
+    Fork the repository.
+    Create a new branch: git checkout -b feature/your-feature
+    Make your changes and commit them: git commit -m 'Add some feature'
+    Push to the branch: git push origin feature/your-feature
+    Submit a pull request detailing your changes.
+
+  
+
+ 
+ 
