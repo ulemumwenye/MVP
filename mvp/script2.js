@@ -1,61 +1,63 @@
 const app = {
   init: () => {
+    // Initialize the app by attaching event listeners to buttons
     document
       .getElementById('btnGet')
-      .addEventListener('click', app.fetchWeather);
+      .addEventListener('click', app.fetchWeather); // Event listener for fetching weather
     document
       .getElementById('btnCurrent')
-      .addEventListener('click', app.getLocation);
+      .addEventListener('click', app.getLocation); // Event listener for getting current location
   },
   fetchWeather: (ev) => {
-    //use the values from latitude and longitude to fetch the weather
+    // Fetch weather data using the provided latitude and longitude
     let lat = document.getElementById('latitude').value;
     let lon = document.getElementById('longitude').value;
-    let key = '06cc7efd0e5386068ec3c390bcfd0183';
-    let lang = 'en';
-    let units = 'metric';
+    let key = '06cc7efd0e5386068ec3c390bcfd0183'; // API key for OpenWeatherMap
+    let lang = 'en'; // Language for weather information
+    let units = 'metric'; // Units for temperature
     let url = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${units}&lang=${lang}`;
-    //fetch the weather
+
+    // Fetch the weather data
     fetch(url)
       .then((resp) => {
         if (!resp.ok) throw new Error(resp.statusText);
         return resp.json();
       })
       .then((data) => {
-        app.showWeather(data);
+        app.showWeather(data); // Display the weather data
       })
       .catch(console.err);
   },
   getLocation: (ev) => {
+    // Get the current location coordinates using geolocation API
     let opts = {
       enableHighAccuracy: true,
-      timeout: 1000 * 10, //10 seconds
-      maximumAge: 1000 * 60 * 5, //5 minutes
+      timeout: 1000 * 10, // 10 seconds
+      maximumAge: 1000 * 60 * 5, // 5 minutes
     };
     navigator.geolocation.getCurrentPosition(app.ftw, app.wtf, opts);
   },
   ftw: (position) => {
-    //got position
+    // Successfully obtained the position coordinates
     document.getElementById('latitude').value =
-      position.coords.latitude.toFixed(2);
+      position.coords.latitude.toFixed(2); // Display latitude in input field
     document.getElementById('longitude').value =
-      position.coords.longitude.toFixed(2);
+      position.coords.longitude.toFixed(2); // Display longitude in input field
   },
   wtf: (err) => {
-    //geolocation failed
+    // Geolocation failed
     console.error(err);
   },
   showWeather: (resp) => {
     console.log(resp);
     let row = document.querySelector('.weather.row');
-    //clear out the old weather and add the new
-    // row.innerHTML = '';
+    // Clear out the old weather data and display the new data
     row.innerHTML = resp.daily
       .map((day, idx) => {
         if (idx <= 2) {
-          let dt = new Date(day.dt * 1000); //timestamp * 1000
-          let sr = new Date(day.sunrise * 1000).toTimeString();
-          let ss = new Date(day.sunset * 1000).toTimeString();
+          let dt = new Date(day.dt * 1000); // Convert timestamp to date object
+          let sr = new Date(day.sunrise * 1000).toTimeString(); // Convert sunrise timestamp to time string
+          let ss = new Date(day.sunset * 1000).toTimeString(); // Convert sunset timestamp to time string
           return `<div class="col">
               <div class="card">
               <h5 class="card-title p-2">${dt.toDateString()}</h5>
@@ -94,4 +96,4 @@ const app = {
   },
 };
 
-app.init();
+app.init(); // Initialize the app
